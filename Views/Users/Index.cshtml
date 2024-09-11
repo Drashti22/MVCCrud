@@ -1,0 +1,71 @@
+﻿@model IEnumerable<MvcPractical.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="my-4">User List</h2>
+
+<p>
+    <a href="@Url.Action("Create", "Users")" class="btn btn-primary mb-3">
+        <i class="fas fa-plus-circle"></i> Create New
+    </a>
+</p>
+
+<div class="table-responsive">
+    <table class="table table-hover table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Mobile No</th>
+                <th>Gender</th>
+                <th>Country</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Known Language</th>
+                <th>Photo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.MobileNo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Gender)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Country.CountryName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.State.StateName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.City)</td>
+                    <td>@Html.DisplayFor(modelItem => item.KnownLanguage)</td>
+                    <td class="text-center">
+                        @if (!string.IsNullOrEmpty(item.PhotoUrl))
+                        {
+                            <img src="@Url.Content(item.PhotoUrl)" alt="User Photo" class="img-thumbnail" style="width: 100px; height: auto;" />
+                        }
+                        else
+                        {
+                            <img src="~/Uploads/No photo.png" alt="Default Photo" class="img-thumbnail" style="width: 100px; height: auto;" />
+                        }
+                    </td>
+                    <td class="text-center">
+                        <a href="@Url.Action("Edit", new { id = item.ID })" title="Edit" class="text-secondary text-decoration-none">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="@Url.Action("Details", new { id = item.ID })" title="Details" class="text-info text-decoration-none">
+                            <i class="fas fa-info-circle"></i>
+                        </a>
+                        <a href="@Url.Action("Delete", new { id = item.ID })" title="Delete" class="text-danger text-decoration-none">
+                            <i class="fas fa-trash"></i>
+                        </a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

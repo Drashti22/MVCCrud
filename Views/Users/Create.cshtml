@@ -1,0 +1,265 @@
+﻿@model MvcPractical.Models.User
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm("Create", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>User</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group mt-2">
+            @Html.LabelFor(model => model.FirstName, "First Name", htmlAttributes: new { @class = "control-label" })
+            <span class="text-danger">*</span>
+            <div class="col-md-10 mt-1">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group mt-2">
+            @Html.LabelFor(model => model.LastName, "Last Name", htmlAttributes: new { @class = "control-label" })
+            <span class="text-danger">*</span>
+            <div class="col-md-10 mt-1">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group mt-2">
+            @Html.LabelFor(model => model.Email, "Email", htmlAttributes: new { @class = "control-label" })
+            <span class="text-danger">*</span>
+            <div class="col-md-10 mt-1">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group mt-2">
+            @Html.LabelFor(model => model.MobileNo, "Mobile No", htmlAttributes: new { @class = "control-label" })
+            <span class="text-danger">*</span>
+            <div class="col-md-10 mt-1">
+                @Html.EditorFor(model => model.MobileNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group mt-2">
+            @Html.LabelFor(model => model.Gender, "Gender", htmlAttributes: new { @class = "control-label" })
+            <span class="text-danger">*</span>
+            <div class="col-md-10 mt-1">
+                <div class="form-check">
+                    @Html.RadioButtonFor(model => model.Gender, "Male", new { @class = "form-check-input" })
+                    @Html.Label("Male", "Male", htmlAttributes: new { @class = "form-check-label" })
+                </div>
+                <div class="form-check">
+                    @Html.RadioButtonFor(model => model.Gender, "Female", new { @class = "form-check-input" })
+                    @Html.Label("Female", "Female", htmlAttributes: new { @class = "form-check-label" })
+                </div>
+                <div class="form-check">
+                    @Html.RadioButtonFor(model => model.Gender, "Other", new { @class = "form-check-input" })
+                    @Html.Label("Other", "Other", htmlAttributes: new { @class = "form-check-label" })
+                </div>
+                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group mt-2">
+                @Html.LabelFor(model => model.CountryId, "Country", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10 mt-1">
+                    @Html.DropDownList("CountryId", (IEnumerable<SelectListItem>)ViewBag.CountryList, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group mt-2">
+                @Html.LabelFor(model => model.StateId, "State", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10 mt-1">
+                    @Html.DropDownList("StateId", (IEnumerable<SelectListItem>)ViewBag.StatesList, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.StateId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group mt-2">
+            @Html.LabelFor(model => model.CountryId, "Country", htmlAttributes: new { @class = "control-label" })
+            <span class="text-danger">*</span>
+            <div class="col-md-10 mt-1">
+                @Html.DropDownList("CountryId", (IEnumerable<SelectListItem>)ViewBag.CountryList, htmlAttributes: new { @class = "form-control", @id = "countryId" })
+                @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group mt-2">
+            @Html.LabelFor(model => model.StateId, "State", htmlAttributes: new { @class = "control-label" })
+            <span class="text-danger">*</span>
+            <div class="col-md-10 mt-1">
+                @Html.DropDownList("StateId", (IEnumerable<SelectListItem>)ViewBag.StateList, htmlAttributes: new { @class = "form-control", @id = "stateId" })
+
+                @*@Html.DropDownList("StateId", new SelectList(Enumerable.Empty<SelectListItem>(), "Value", "Text"), htmlAttributes: new { @class = "form-control", @id = "stateId" })*@
+                @Html.ValidationMessageFor(model => model.StateId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group mt-2">
+            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label" })
+            <span class="text-danger">*</span>
+            <div class="col-md-10 mt-1">
+                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group mt-2">
+            @Html.LabelFor(model => model.KnownLanguage, "Known Language", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10 mt-1">
+                @*@foreach (var language in ViewBag.KnownLanguages as IEnumerable<SelectListItem>)
+                    {
+                        <div class="form-check">
+                            @Html.CheckBox("knownLanguages", false, new { @class = "form-check-input", id = language.Value })
+                            @Html.Label(language.Value, language.Text, new { @class = "form-check-label", @for = language.Value })
+                        </div>
+                    }*@
+                <input type="hidden" id="KnownLanguage" name="KnownLanguage" />
+                @foreach (var language in ViewBag.KnownLanguages as IEnumerable<SelectListItem>)
+                {
+                    <div class="form-check">
+                        @if (Model == null)
+                        {
+                            <input type="checkbox" class="form-check-input known-language-checkbox" value="@language.Text" />
+                        }
+                        else if (Model != null)
+                        {
+                            <input type="checkbox" class="form-check-input known-language-checkbox" value="@language.Value"
+                                   @(Model.KnownLanguage.Split(',').Select(l => l.Trim()).Contains(language.Value) ? "checked" : "") />
+                        }
+                        @Html.Label(language.Value, language.Text, new { @class = "form-check-label" })
+                    </div>
+                }
+                @*@Html.ValidationMessageFor(model => model.KnownLanguage, "", new { @class = "text-danger" })*@
+            </div>
+        </div>
+
+        <div class="form-group mt-2">
+            @Html.LabelFor(model => model.PhotoUrl, "Photo", htmlAttributes: new { @class = "control-label" })
+            <div class="col-md-10 mt-1">
+                <input type="file" name="Photo" class="form-control" id="photoInput" accept=".jpg,.jpeg,.png"/>
+                <div class="mt-2">
+                    <img src="~/Uploads/No photo.png" alt="Default Photo" class="img-thumbnail mt-2 photoPreview" style="width: 100px; height: auto;" />
+                </div>
+
+                <span class="text-danger" id="photoError">@Html.ValidationMessageFor(model => model.PhotoUrl, "", new { @class = "text-danger" })</span>
+            </div>
+        </div>
+
+        <div class="form-group mt-2">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-outline-success" />
+            </div>
+        </div>
+    </div>
+}
+
+<div class="mt-2 btn btn-outline-primary"
+     onmouseover="this.querySelector('a').style.color='white';"
+     onmouseout="this.querySelector('a').style.color='inherit';">
+    @Html.ActionLink("User List", "Index", null, new { @class = "text-decoration-none", style = "color: inherit;" })
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+        let countryId = $('#countryId').val();
+        if (countryId == null && countryId == '') {
+            $('#stateId').empty();
+            $('#stateId').append($('<option>', {
+                value: '-1',
+                text: 'Select State',
+                disabled: true,
+                selected: true
+            }));
+        }              
+    });
+
+    $('#countryId').on('change', function () {
+            filterStatesList($(this).val());
+    });
+
+        $('.known-language-checkbox').change(function () {
+            var selectedLanguages = [];
+        $('.known-language-checkbox:checked').each(function () {
+            selectedLanguages.push($(this).val());
+            console.log(selectedLanguages, "languages")
+        });
+        $('#KnownLanguage').val(selectedLanguages.join(', '));
+    });
+    $('#photoInput').on('change', function () {
+        var file = this.files[0];
+        var validFileTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+
+
+        if (file) {
+            var reader = new FileReader();
+            var fileType = file.type;
+            if (!validFileTypes.includes(fileType)) {
+                $('#photoError').html('Invalid file format. Only JPG, JPEG, and PNG are allowed.');
+                $('.photoPreview').attr('src', '~/Uploads/No photo.png');  // Reset to default image
+                this.value = '';  // Clear the input
+            } else {
+                reader.onload = function (e) {
+                    $('.photoPreview').attr('src', e.target.result);  // Show preview
+                };
+                reader.readAsDataURL(file);
+                $('#photoError').html('');  // Clear error message
+            }
+        }
+    });
+
+        $('form').submit(function (e) {
+        var photoInput = $('#photoInput')[0].files.length;
+        if (photoInput === 0) {
+            $('#photoError').html('Photo is required.'); 
+            e.preventDefault(); 
+        } else {
+            if (file) {
+                var fileType = file.type;
+                if (!validFileTypes.includes(fileType)) {
+                    $('#photoError').html('Invalid file format. Only JPG, JPEG, and PNG are allowed.');
+                    e.preventDefault();
+                } else {
+                    $('#photoError').html('');
+                }
+            }
+        }
+    });
+
+    function filterStatesList(countryId) {
+ $.ajax({
+     type: 'GET',
+     url: '@Url.Action("GetStatesByCountryId", "Users")',
+     data: { countryId: countryId },
+     success: function (data) {
+         //$('#stateId').empty();
+         $('#stateId').append($('<option>', {
+             value: '-1',
+             text: 'Select State',
+             disabled: true,
+             selected: true
+         }));
+
+         $.each(data, function (index, item) {
+             $('#stateId').append($('<option>', { value: item.Value, text: item.Text }));
+         });
+     }
+ });
+    }
+    </script>
+}
